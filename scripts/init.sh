@@ -43,7 +43,7 @@ else
   echo "no import specified"
 fi
 
-if [ ! -f "salts.php" ]; then
+if [ ! -f "secrets/salts.php" ]; then
   cp secrets/salts.sample.php secrets/salts.php
   chown www-data:www-data secrets/salts.php
   bash scripts/wp-salt-gen.sh /var/www/html/secrets salts.php

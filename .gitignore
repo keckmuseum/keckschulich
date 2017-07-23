@@ -4,7 +4,8 @@
 
 # Ignore everything with sensitive data
 # wp-config.php now uses environment variables and an auto-generated salt, no longer ignored.
-salts.php
+/secrets/*
+!/secrets/salts.sample.php
 
 # Ignore the docker-compose file because of credentials. But keep the sample.
 docker-compose.yml

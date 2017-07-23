@@ -44,9 +44,9 @@ else
 fi
 
 if [ ! -f "salts.php" ]; then
-  cp salts.sample.php salts.php
-  chown www-data:www-data salts.php
-  bash scripts/wp-salt-gen.sh /var/www/html salts.php
+  cp secrets/salts.sample.php secrets/salts.php
+  chown www-data:www-data secrets/salts.php
+  bash scripts/wp-salt-gen.sh /var/www/html/secrets salts.php
 else
   echo "salts exist"
 fi

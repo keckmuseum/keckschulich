@@ -3,28 +3,26 @@
 #/public/.htaccess
 
 # Ignore everything with sensitive data
-# Ignore the wp-configs but not the sample.
-wp-config.*.php
-!wp-config.sample.php
+# wp-config.php now uses environment variables and an auto-generated salt, no longer ignored.
+salts.php
 
-# Ignore the scripts config variables but not the sample.
-/scripts/scripts-config.sh
-!/scripts/scripts-config.sample.sh
+# Ignore the docker-compose file because of credentials. But keep the sample.
+docker-compose.yml
+
+# Ignore mysql db files
+/docker/conf/db_data
 
 # Ignore the database backups
 /db/archive/*
 /db/latest/*
-!/db/archive
-!/db/latest
 
-# Ignore the wp core directory
-/public/wpcr/*
-!/public/wpcr
+# Ignore the wp core directory (default is x)
+/public/x/*
 
 # Ignore the .htaccess file
 /public/.htaccess
 
-# Ignore the content directory
+# Ignore the content directory (default is content)
 /public/content/*
 /public/content/plugins/*
 /public/content/uploads/*
@@ -33,20 +31,3 @@ wp-config.*.php
 !/public/content/plugins
 !/public/content/uploads
 !/public/content/themes
-
-
-
-# Don’t ignore plugins dir, but ignore everything inside
-#!/wp-content/plugins
-#/wp-content/plugins/*
-
-# Don’t ignore themes dir, but ignore everything inside
-#!/wp-content/themes
-#/wp-content/themes/*
-
-# Don’t ignore these plugins
-#!/wp-content/themes/index.php
-#!/wp-content/themes/twentyseventeen
-
-# Don’t ignore these plugins
-#!/wp-content/plugins/akismet

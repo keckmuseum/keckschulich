@@ -1,28 +1,7 @@
-# WordPress Dependency Structure #
-
+# WordPress Scaffold #
+A Scaffold structure for WordPress (core in a subdirectory), with a sample docker-compose file, and scripts to set everything up. Based on a docker image with ubuntu 16.04 letsencrypt certbot and wp-cli.
 
 ### Install ###
-* The whole project should be created and write-able by your user.
-* /content and .htaccess should be owned by a group shared with your user and apache/nginx.
-* For Docker php5 you must install the mysqli extension at container command line: docker-php-ext-install mysqli 
-
-### Manual Install ###
-* Clone starter repo, if it's already been set up with submodules use git clone --recursive
-* Checkout correct branch on any submodules
-
-### Script Install ###
-
-```
-#!bash
-cd scripts
-bash move-in.sh #just download core ctrl-c after the rest of this script is WIP
-cp public/.htaccess.sample public/.htaccess
-cp wp-config.sample.php wp-config.local.php
-cp scripts/scripts-config.sample.sh scripts/scripts-config.sh
-
-```
-* Edit the wp-config.local.php and scripts-config.sh to match your database and domain settings.
-* Hit yourdomain.com/wpcr/wp-admin #should redirect to the install OR login if this is an existing WP install.
-* WP Admin:
-    * Go to Settings >  General be sure WordPress Address (URL) is the path to the WP subdirectory, then save.
-    * Go to Settings > Permalinks and set an option for the permalink structure, then save.
+* `cp docker/docker-compose.sample.yml docker/docker-compose.yml`
+* edit docker/docker-compose.yml
+* `docker-compose up -d`

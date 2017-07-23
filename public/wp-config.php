@@ -4,13 +4,21 @@ ini_set( 'display_errors', 0 );
 // ===================================================
 // Load database info and local development parameters
 // ===================================================
-if ( file_exists( dirname( __FILE__ ) . '/../wp-config.production.php' ) ) {
-    define( 'WP_LOCAL_DEV', false );
-    include( dirname( __FILE__ ) . '/../wp-config.production.php' );
-} else {
-    define( 'WP_LOCAL_DEV', true );
-    include( dirname( __FILE__ ) . '/../wp-config.local.php' );
+define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
+define( 'DB_USER',  getenv('WORDPRESS_DB_USER') );
+define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
+define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
+
+define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL').'://'.getenv('WORDPRESS_DOMAIN').'/'.getenv('WORDPRESS_CONTENT_DIR'));
+
+//define('FS_METHOD', 'direct');
+if(getenv('WORDPRESS_DEBUG')==true){
+  ini_set( 'display_errors', E_ALL );
+  define( 'WP_DEBUG_DISPLAY', true );
+  define( 'WP_DEBUG', true );
 }
+
+require(../salts.php);
 
 // ========================
 // Custom Content Directory
@@ -49,6 +57,6 @@ define( 'AUTOMATIC_UPDATER_DISABLED', false );
 $table_prefix  = 'wp_';
 
 if ( ! defined( 'ABSPATH' ) ) {
-    define( 'ABSPATH', dirname( __FILE__ ) . '/wpcr/' );
+    define( 'ABSPATH', dirname( __FILE__ ) . '/' . getenv('WORDPRESS_CORE_DIR') . '/' );
 }
 require_once( ABSPATH . 'wp-settings.php' );

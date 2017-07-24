@@ -25,12 +25,12 @@ runs an init bash script to check some things and do some initial setup if neede
 * Mounts most of the same directories as wordpress container
 * Has same environment variables as wordpress container
 * Runs scripts/init.sh
-** Checks if core directory exists
-*** If not: creates it, downloads wp core files, and sets up permissions
-** Checks if public/content directory exists
-*** If not: creates it and sets up permissions
-** Checks the WORDPRESS_IMPORT_DB variable
-*** If set: pushes that file to the mysql db (set in docker-compose environment variables)
-** Checks if the secrets/salts.php file exists
-*** If not: creates a copy from secrets/salts.sample.php, then runs another script to generate the salts.
-** Cron jobs: coming soon...
+..* Checks if core directory exists
+...* If not: creates it, downloads wp core files, and sets up permissions
+..* Checks if public/content directory exists
+...* If not: creates it and sets up permissions
+..* Checks the WORDPRESS_IMPORT_DB variable
+...* If set: pushes that file to the mysql db (set in docker-compose environment variables)
+..* Checks if the secrets/salts.php file exists
+...* If not: creates a copy from secrets/salts.sample.php, then runs another script to generate the salts.
+..* Cron jobs: coming soon...

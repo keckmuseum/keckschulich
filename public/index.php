@@ -14,4 +14,4 @@
 define('WP_USE_THEMES', true);
 
 /** Loads the WordPress Environment and Template */
-require( dirname( __FILE__ ) . '/wpcr/wp-blog-header.php' );
+require( dirname( __FILE__ ) . '/'.getenv('WORDPRESS_CORE_DIR').'/wp-blog-header.php' );

@@ -9,7 +9,7 @@ define( 'DB_USER',  getenv('WORDPRESS_DB_USER') );
 define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
 define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
 
-define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL').'://'.getenv('WORDPRESS_DOMAIN').'/'.getenv('WORDPRESS_CONTENT_DIR'));
+//define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL').'://'.getenv('WORDPRESS_DOMAIN').'/'.getenv('WORDPRESS_CONTENT_DIR'));
 
 //define('FS_METHOD', 'direct');
 if(getenv('WORDPRESS_DEBUG')==true){
@@ -25,7 +25,7 @@ require(../salts.php);
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
 if(isset($_SERVER['HTTP_HOST'])) {
-  define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
+  define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL') . $_SERVER['HTTP_HOST'] . '/' . getenv('WORDPRESS_CONTENT_DIR') );
 }
 
 // ================================================

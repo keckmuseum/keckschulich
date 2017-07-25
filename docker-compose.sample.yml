@@ -14,15 +14,24 @@ services:
        MYSQL_DATABASE: sampleDbName #!Change these
        MYSQL_USER: sampleDbUser #!Change these
        MYSQL_PASSWORD: sampleDbPass #!Change these
-
-   wordpress:
+   php:
+     image: php:7-fpm
+     volumes:
+       - ./docker/conf/php:/etc/php
+       - ./public:/var/www/html/public #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
+       - ./secrets:/var/www/html/secrets
+       - ./scripts:/var/www/html/scripts
+     restart: always
+   nginx:
      depends_on:
        - db
+       - php
        - wordpressinit
+     links:
+       - php
      image: revoltmedia/ubuntu
      volumes:
        - ./docker/conf/nginx:/etc/nginx
-       - ./docker/conf/php:/etc/php
        - ./public:/var/www/html/public #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
        - ./secrets:/var/www/html/secrets
        - ./scripts:/var/www/html/scripts
@@ -44,10 +53,10 @@ services:
    wordpressinit:
      depends_on:
        - db
+       - php
      image: revoltmedia/ubuntu
      volumes:
        - ./docker/conf/nginx:/etc/nginx
-       - ./docker/conf/php:/etc/php
        - ./public:/var/www/html/public #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
        - ./secrets:/var/www/html/secrets
        - ./scripts:/var/www/html/scripts

@@ -36,6 +36,7 @@ runs an init bash script to check some things and do some initial setup if neede
 ** Cron jobs: coming soon...
 
 ##### Known Issues #####
-* nginx forbidden (permission issues?)
+* 500 error
 * import db option untested
 * cron jobs option doesn't work yet
+* need to centralize environment variables into a separate import

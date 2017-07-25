@@ -35,7 +35,7 @@ runs an init bash script to check some things and do some initial setup if neede
 *** If not: creates a copy from secrets/salts.sample.php, then runs another script to generate the salts.
 ** Cron jobs: coming soon...
 
-#### Known Issues ####
+##### Known Issues #####
 * nginx forbidden (permission issues?)
 * import db option untested
 * cron jobs option doesn't work yet

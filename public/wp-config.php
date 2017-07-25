@@ -18,7 +18,7 @@ if(getenv('WORDPRESS_DEBUG')==true){
   define( 'WP_DEBUG', true );
 }
 
-require(../salts.php);
+require('../secrets/salts.php');
 
 // ========================
 // Custom Content Directory

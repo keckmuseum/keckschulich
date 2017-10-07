@@ -13,7 +13,7 @@ define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
 
 //define('FS_METHOD', 'direct');
 
-require('../secrets/salts.php');
+require('/var/www/html/secrets/salts.php');
 
 // ========================
 // Custom Content Directory

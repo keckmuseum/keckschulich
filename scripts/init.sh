@@ -6,8 +6,7 @@ cd /var/www/html
 if [ ! -d "public/$WORDPRESS_CORE_DIR" ]; then
   echo "creating public/${WORDPRESS_CORE_DIR}"
   sudo mkdir public/$WORDPRESS_CORE_DIR
-  sudo chown www-data:www-data public/$WORDPRESS_CORE_DIR
-  sudo chown www-data:www-data public
+
 
   # Download core files
   cd public/$WORDPRESS_CORE_DIR
@@ -26,6 +25,9 @@ else
   echo "core directory exists"
 fi
 
+
+
+
 cd /var/www/html
 
 if [ ! -d "public/$WORDPRESS_CONTENT_DIR" ]; then
@@ -35,6 +37,34 @@ if [ ! -d "public/$WORDPRESS_CONTENT_DIR" ]; then
 else
   echo "content directory exists"
 fi
+
+if [ ! -d "public/$WORDPRESS_CONTENT_DIR/themes" ]; then
+  echo "creating public/${WORDPRESS_CONTENT_DIR}/themes"
+  sudo mkdir public/$WORDPRESS_CONTENT_DIR/themes
+else
+  echo "themes directory exists"
+fi
+
+if [ ! -d "public/$WORDPRESS_CONTENT_DIR/plugins" ]; then
+  echo "creating public/${WORDPRESS_CONTENT_DIR}/plugins"
+  sudo mkdir public/$WORDPRESS_CONTENT_DIR/plugins
+else
+  echo "plugins directory exists"
+fi
+
+if [ ! -d "public/$WORDPRESS_CONTENT_DIR/uploads" ]; then
+  echo "creating public/${WORDPRESS_CONTENT_DIR}/uploads"
+  sudo mkdir public/$WORDPRESS_CONTENT_DIR/uploads
+else
+  echo "uploads directory exists"
+fi
+
+echo "setting permisions on public, public/$WORDPRESS_CORE_DIR and public/$WORDPRESS_CONTENT_DIR"
+sudo chown root:www-data public
+sudo chown -Rf root:www-data public/$WORDPRESS_CORE_DIR
+sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
+sudo chmod -Rf 755 public
+
 
 if [[ $WORDPRESS_IMPORT_DB != '' ]] && [[ -f $WORDPRESS_IMPORT_DB ]]; then
   echo "importing db from ${WORDPRESS_IMPORT_DB}"

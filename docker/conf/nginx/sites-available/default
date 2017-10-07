@@ -19,8 +19,8 @@ server {
 
 	# SSL configuration
 	#
-	# listen 443 ssl default_server;
-	# listen [::]:443 ssl default_server;
+	listen 443 ssl default_server;
+	listen [::]:443 ssl default_server;
 	#
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332
@@ -32,6 +32,10 @@ server {
 	# Don't use them in a production server!
 	#
 	# include snippets/snakeoil.conf;
+
+	## Self Signed Keys NOT FOR PRODUCTION ##
+	ssl_certificate /etc/ssl/certs/nginx.crt;
+	ssl_certificate_key /etc/ssl/private/nginx.key;
 
 	root /var/www/html/public;
 

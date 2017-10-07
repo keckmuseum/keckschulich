@@ -48,6 +48,8 @@ services:
        - php
      image: revoltmedia/ubuntu
      volumes:
+       - ./docker/ssl/certs/nginx.crt:/etc/ssl/certs/nginx.crt #Self Signed, NOT FOR PRODUCTION
+       - ./docker/ssl/private/nginx.key:/etc/ssl/private/nginx.key #Self Signed, NOT FOR PRODUCTION
        - ./docker/conf/nginx:/etc/nginx
        - ./public:/var/www/html/public #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
        - ./secrets:/var/www/html/secrets

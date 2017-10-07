@@ -5,9 +5,9 @@ cd /var/www/html
 # Create directories
 if [ ! -d "public/$WORDPRESS_CORE_DIR" ]; then
   echo "creating public/${WORDPRESS_CORE_DIR}"
-  mkdir public/$WORDPRESS_CORE_DIR
-  chown www-data:www-data public/$WORDPRESS_CORE_DIR
-  chown www-data:www-data public
+  sudo mkdir public/$WORDPRESS_CORE_DIR
+  sudo chown www-data:www-data public/$WORDPRESS_CORE_DIR
+  sudo chown www-data:www-data public
 
   # Download core files
   cd public/$WORDPRESS_CORE_DIR

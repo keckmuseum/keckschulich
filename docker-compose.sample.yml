@@ -28,6 +28,7 @@ services:
        - ./scripts:/var/www/html/scripts
      restart: always
      environment:
+       HOST_USER_ID: 1000
        WORDPRESS_ENV: development # OR production, stage, release
        WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
@@ -38,6 +39,7 @@ services:
        WORDPRESS_DB_NAME: sampleDbName #!Change these
        WORDPRESS_DB_USER: sampleDbUser #!Change these
        WORDPRESS_DB_PASSWORD: sampleDbPass #!Change these
+       WORDPRESS_FORCE_SSL_ADMIN: 'true'
        #WORDPRESS_IMPORT_DB: $WORDPRESS_IMPORT_DB # THIS WILL WIPE YOUR CURRENT DB. Set this env variable on host before running docker-compose $WORDPRESS_IMPORT_DB='db/db.sql' && docker-compose up -d.
    nginx:
      depends_on:
@@ -58,6 +60,7 @@ services:
        - "8888:80"
      restart: always
      environment:
+       HOST_USER_ID: 1000
        WORDPRESS_ENV: development # OR production, stage, release
        WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
@@ -68,6 +71,7 @@ services:
        WORDPRESS_DB_NAME: sampleDbName #!Change these
        WORDPRESS_DB_USER: sampleDbUser #!Change these
        WORDPRESS_DB_PASSWORD: sampleDbPass #!Change these
+       WORDPRESS_FORCE_SSL_ADMIN: 'true'
        #WORDPRESS_IMPORT_DB: $WORDPRESS_IMPORT_DB # THIS WILL WIPE YOUR CURRENT DB. Set this env variable on host before running docker-compose $WORDPRESS_IMPORT_DB='db/db.sql' && docker-compose up -d.
    wordpressinit:
      depends_on:
@@ -80,6 +84,7 @@ services:
        - ./secrets:/var/www/html/secrets
        - ./scripts:/var/www/html/scripts
      environment:
+       HOST_USER_ID: 1000
        WORDPRESS_ENV: development # OR production, stage, release
        WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
@@ -90,6 +95,7 @@ services:
        WORDPRESS_DB_NAME: sampleDbName #!Change these
        WORDPRESS_DB_USER: sampleDbUser #!Change these
        WORDPRESS_DB_PASSWORD: sampleDbPass #!Change these
+       WORDPRESS_FORCE_SSL_ADMIN: 'true'
        #WORDPRESS_IMPORT_DB: $WORDPRESS_IMPORT_DB # THIS WILL WIPE YOUR CURRENT DB. Set this env variable on host before running docker-compose $WORDPRESS_IMPORT_DB='db/db.sql' && docker-compose up -d.
        #CRON_JOBS: '1 4 * * 0 cerbot renew --nginx >> /tmp/cron-certbot-renew.log; */15 * * * * sh /var/www/html/scripts/backup-db.sh "/var/www/html/db" exampleSite'  # Cron job to add Sample is for certbot Sundays at 04:01
      command: bash -c "bash /var/www/html/scripts/init.sh"

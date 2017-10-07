@@ -19,10 +19,10 @@ if [ ! -d "public/$WORDPRESS_CORE_DIR" ]; then
   cd public/$WORDPRESS_CORE_DIR
   if [[ -n $WORDPRESS_VERSION ]] && [[ $WORDPRESS_VERSION != '' ]]; then
     echo "downloading WP ${WORDPRESS_VERSION} core files"
-    sudo -E -u www-data wpcli core download --version=$WORDPRESS_VERSION
+    sudo -E -u $HOST_USER_ID wpcli core download --version=$WORDPRESS_VERSION
   else
     echo "downloading WP latest core files"
-    sudo -E -u www-data wpcli core download
+    sudo -E -u $HOST_USER_ID wpcli core download
   fi
   if [[ -f "public/$WORDPRESS_CORE_DIR/.htaccess" ]] && [[ ! -f "public/.htaccess" ]]; then
     echo "copying .htaccess from core"

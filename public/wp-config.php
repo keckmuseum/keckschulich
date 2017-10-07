@@ -33,15 +33,37 @@ define( 'DB_COLLATE', '' );
 // Language
 // Leave blank for American English
 // ================================
-define( 'WPLANG', '' );
+
+if(getenv('WORDPRESS_LANG')) {
+  define( 'WPLANG', WORDPRESS_LANG );
+}
+
+if(getenv('WORDPRESS_MEMORY_LIMIT')) {
+  define( 'WP_MEMORY_LIMIT', WORDPRESS_MEMORY_LIMIT );
+}
+
+if(getenv('WORDPRESS_DISALLOW_FILE_MODS')) {
+  define( 'DISALLOW_FILE_MODS', WORDPRESS_DISALLOW_FILE_MODS );
+}
+
+if(getenv('WORDPRESS_FORCE_SSL_ADMIN')) {
+  define( 'FORCE_SSL_ADMIN', WORDPRESS_FORCE_SSL_ADMIN );
+}
+
 
 // ======================
 // Hide errors by default
 // ======================
-if(getenv('WORDPRESS_DEBUG')==true){
+if(getenv('WORDPRESS_DEBUG')==true || (getenv('WORDPRESS_DEBUG')==NULL && getenv('WORDPRESS_ENV')=='development')){
   ini_set( 'display_errors', E_ALL );
-  define( 'WP_DEBUG_DISPLAY', true );
-  define( 'WP_DEBUG', true );
+  define( 'WP_DEBUG',         true );
+  define( 'WP_DEBUG_LOG',     true );
+  define( 'WP_DEBUG_DISPLAY', false );
+  define( 'SCRIPT_DEBUG',     true );
+}
+
+if(getenv('WORDPRESS_SAVEQUERIES')) {
+  define( 'SAVEQUERIES',      WORDPRESS_SAVEQUERIES );
 }
 
 // =========================

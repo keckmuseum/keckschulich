@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ ! -f "/etc/ssl/certs/nginx.crt" ] || [ ! -f "/etc/ssl/private/nginx.key" ]; then
+  echo "generating self signed SSL certs"
+  sudo openssl req -subj "/C=US/ST=NV/L=Reno/O=Developer/OU=Development/CN=localhost" -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt
+else
+  echo "self signed SSL certs found"
+fi
+
 cd /var/www/html
 
 # Create directories
@@ -60,10 +67,16 @@ else
 fi
 
 echo "setting permisions on public, public/$WORDPRESS_CORE_DIR and public/$WORDPRESS_CONTENT_DIR"
-sudo chown root:www-data public
-sudo chown -Rf root:www-data public/$WORDPRESS_CORE_DIR
-sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
-sudo chmod -Rf 755 public
+#sudo chown root:www-data public
+#sudo chown -Rf root:www-data public/$WORDPRESS_CORE_DIR
+#sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
+sudo find . -type d -exec chmod 755 {} \;  # Change directory permissions rwxr-xr-x
+sudo find . -type f -exec chmod 644 {} \;  # Change file permissions rw-r--r--
+sudo chown $HOST_USER_ID:root  -R * # Let your useraccount be owner
+sudo chown www-data:www-data public/$WORDPRESS_CONTENT_DIR # Let apache be owner of wp-content
+if [[ $WORDPRESS_ENV = 'development' ]]; then
+  sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
+fi
 
 
 if [[ $WORDPRESS_IMPORT_DB != '' ]] && [[ -f $WORDPRESS_IMPORT_DB ]]; then

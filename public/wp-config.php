@@ -12,18 +12,13 @@ define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
 //define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL').'://'.getenv('WORDPRESS_DOMAIN').'/'.getenv('WORDPRESS_CONTENT_DIR'));
 
 //define('FS_METHOD', 'direct');
-if(getenv('WORDPRESS_DEBUG')==true){
-  ini_set( 'display_errors', E_ALL );
-  define( 'WP_DEBUG_DISPLAY', true );
-  define( 'WP_DEBUG', true );
-}
 
 require('../secrets/salts.php');
 
 // ========================
 // Custom Content Directory
 // ========================
-define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
+define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/' . getenv('WORDPRESS_CONTENT_DIR') );
 if(isset($_SERVER['HTTP_HOST'])) {
   define( 'WP_CONTENT_URL', getenv('WORDPRESS_PROTOCOL') . $_SERVER['HTTP_HOST'] . '/' . getenv('WORDPRESS_CONTENT_DIR') );
 }
@@ -43,8 +38,11 @@ define( 'WPLANG', '' );
 // ======================
 // Hide errors by default
 // ======================
-//define( 'WP_DEBUG_DISPLAY', false );
-//define( 'WP_DEBUG', false );
+if(getenv('WORDPRESS_DEBUG')==true){
+  ini_set( 'display_errors', E_ALL );
+  define( 'WP_DEBUG_DISPLAY', true );
+  define( 'WP_DEBUG', true );
+}
 
 // =========================
 // Disable automatic updates

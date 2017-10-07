@@ -12,8 +12,12 @@ docker-compose.yml
 
 # Ignore mysql db files
 /docker/conf/db_data
+
+# Ignore SSL certs but keep structure
 /docker/ssl/certs/*
 /docker/ssl/private/*
+!/docker/ssl/certs/.keep
+!/docker/ssl/private/.keep
 
 # Ignore the database backups
 /db/archive/*

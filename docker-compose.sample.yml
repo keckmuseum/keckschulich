@@ -29,7 +29,7 @@ services:
      restart: always
      environment:
        WORDPRESS_ENV: development # OR production, stage, release
-       WORDPRESS_PROTOCOL: https # OR http
+       WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
        WORDPRESS_CONTENT_DIR: content # Under /public
        WORDPRESS_CORE_DIR: x # Under /public
@@ -57,7 +57,7 @@ services:
      restart: always
      environment:
        WORDPRESS_ENV: development # OR production, stage, release
-       WORDPRESS_PROTOCOL: https # OR http
+       WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
        WORDPRESS_CONTENT_DIR: content # Under /public
        WORDPRESS_CORE_DIR: x # Under /public
@@ -79,7 +79,7 @@ services:
        - ./scripts:/var/www/html/scripts
      environment:
        WORDPRESS_ENV: development # OR production, stage, release
-       WORDPRESS_PROTOCOL: https # OR http
+       WORDPRESS_PROTOCOL: https:// # OR http://
        WORDPRESS_DOMAIN: www.example.com #!Change these
        WORDPRESS_CONTENT_DIR: content # Under /public
        WORDPRESS_CORE_DIR: x # Under /public

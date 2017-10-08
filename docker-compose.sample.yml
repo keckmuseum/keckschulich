@@ -100,5 +100,27 @@ services:
        #CRON_JOBS: '1 4 * * 0 cerbot renew --nginx >> /tmp/cron-certbot-renew.log; */15 * * * * sh /var/www/html/scripts/backup-db.sh "/var/www/html/db" exampleSite'  # Cron job to add Sample is for certbot Sundays at 04:01
      command: bash -c "bash /var/www/html/scripts/init.sh"
 
+    wpcli:
+     depends_on:
+       - db
+     image: tatemz/wp-cli
+     volumes:
+       - ./:/var/www/html/ #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
+     links:
+       - db:mysql
+     environment:
+       HOST_USER_ID: 1000
+       WORDPRESS_ENV: development # OR production, stage, release
+       WORDPRESS_PROTOCOL: https:// # OR http://
+       WORDPRESS_DOMAIN: www.example.com #!Change these
+       WORDPRESS_CONTENT_DIR: content # Under /public
+       WORDPRESS_CORE_DIR: x # Under /public
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_NAME: sampleDbName #!Change these
+       WORDPRESS_DB_USER: sampleDbUser #!Change these
+       WORDPRESS_DB_PASSWORD: sampleDbPass #!Change these
+     entrypoint: wp
+     command: "--info"
+
 volumes:
     db_data:

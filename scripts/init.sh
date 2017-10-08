@@ -74,9 +74,9 @@ sudo find . -type d -exec chmod 755 {} \;  # Change directory permissions rwxr-x
 sudo find . -type f -exec chmod 644 {} \;  # Change file permissions rw-r--r--
 sudo chown $HOST_USER_ID:root  -R * # Let your useraccount be owner
 sudo chown www-data:www-data public/$WORDPRESS_CONTENT_DIR # Let apache be owner of wp-content
-if [[ $WORDPRESS_ENV = 'development' ]]; then
-  sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
-fi
+# if [[ $WORDPRESS_ENV = 'development' ]]; then
+#   sudo chown -Rf www-data:www-data public/$WORDPRESS_CONTENT_DIR
+# fi
 
 
 if [[ $WORDPRESS_IMPORT_DB != '' ]] && [[ -f $WORDPRESS_IMPORT_DB ]]; then

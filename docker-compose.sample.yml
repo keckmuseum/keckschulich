@@ -23,6 +23,7 @@ services:
      build: ./docker/dockerfiles/php
      volumes:
        - ./docker/conf/php-fpm:/usr/local/etc/php-fpm.d
+       - ./docker/conf/usr-local-etc-php:/usr/local/etc/php
        - ./public:/var/www/html/public #! Modifying this has reprocussions: the wordpress code location, the init script command and init script itself, and nginx vhost
        - ./secrets:/var/www/html/secrets
        - ./scripts:/var/www/html/scripts

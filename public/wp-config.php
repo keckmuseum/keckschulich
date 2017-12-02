@@ -54,13 +54,13 @@ if(getenv('WORDPRESS_FORCE_SSL_ADMIN')) {
 // ======================
 // Hide errors by default
 // ======================
-if(getenv('WORDPRESS_DEBUG')==true || (getenv('WORDPRESS_DEBUG')==NULL && getenv('WORDPRESS_ENV')=='development')){
-  ini_set( 'display_errors', E_ALL );
+// if(getenv('WORDPRESS_DEBUG')==true || (getenv('WORDPRESS_DEBUG')==NULL && getenv('WORDPRESS_ENV')=='development')){
+//   ini_set( 'display_errors', E_ALL );
   define( 'WP_DEBUG',         true );
-  define( 'WP_DEBUG_LOG',     true );
-  define( 'WP_DEBUG_DISPLAY', false );
-  define( 'SCRIPT_DEBUG',     true );
-}
+//   define( 'WP_DEBUG_LOG',     true );
+//   define( 'WP_DEBUG_DISPLAY', false );
+//   define( 'SCRIPT_DEBUG',     true );
+// }
 
 if(getenv('WORDPRESS_SAVEQUERIES')) {
   define( 'SAVEQUERIES',      WORDPRESS_SAVEQUERIES );
@@ -69,7 +69,7 @@ if(getenv('WORDPRESS_SAVEQUERIES')) {
 // =========================
 // Disable automatic updates
 // =========================
-define( 'AUTOMATIC_UPDATER_DISABLED', false );
+// define( 'AUTOMATIC_UPDATER_DISABLED', false );
 
 // =======================
 // Load WordPress Settings
